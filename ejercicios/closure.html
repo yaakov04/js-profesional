@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Closures</title>
+  </head>
+  <body>
+    <h1>Closures</h1>
+
+    <script>
+      //Closures
+
+      //////////printColor//////////
+      /*
+        De este modo la variable se encuentra disponible globalmente
+
+        let color = 'green';
+
+        function printColor(){
+            console.log(color);
+        }
+
+        printColor();
+        */
+
+      //printColor dentro de un iife (immediately invoked function expression)
+      /*
+      Para que la variable no este disponible globalmente se le
+      encierra dentro de una funcion (IIFE).
+
+      Closure es la combinacion del scope de una funcion
+      y la funcion donde fue definida
+      
+      (function () {// Este es el scope
+        let color = "green";
+
+        function printColor() { // Esta la funcion definida
+          console.log(color);
+        }
+
+        printColor();
+      })();
+      */
+
+      ////////////Funciones que regresan funciones//////////
+
+      function makeColorPrinter(color) {
+        let colorMessage = `El color es: ${color}`;
+        return function () {
+          /*Esta funcion esta fuera del
+                            scope donde fue definido*/
+          console.log(colorMessage);
+        };
+      }
+
+      let greenColorPrinter = makeColorPrinter("green"); /*Aqui 
+                                la funcion se encuentra fuera del scope
+                                donde fue definido, pero recuerda los 
+                                valores con los que fue definido
+                                Esto es closure*/
+
+      //console.log(greenColorPrinter());
+
+      ////////Variables "privadas"/////////
+      /*
+      Los closures permiten hacer variables privadas
+      */
+      /*const counter = {
+         count: 3, 
+     }*/
+      /*De esta forma cualquiera tiene acceso a la
+    variable count*/
+
+      //console.log(counter.count);
+      /* De esta forma no se puede acceder a la variable count*/
+      function makeCounter(n) {
+        let count = n;
+
+        return {
+          /*Se puede acceder a la variable count por medio
+          de las funciones*/
+          increase: function () {
+              count = count + 1;
+          },
+          decrease: function () {
+            count = count - 1;
+          },
+          getCount: function () {
+              return count;
+          },
+        };
+      }
+      let counter = makeCounter(7);
+      console.log(counter.getCount());
+      counter.increase();
+      console.log(counter.getCount());
+      counter.decrease();
+      counter.decrease();
+      counter.decrease();
+      counter.decrease();
+      console.log(counter.getCount());
+    </script>
+  </body>
+</html>
