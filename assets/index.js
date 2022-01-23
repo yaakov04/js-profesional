@@ -1,34 +1,13 @@
-const video = document.querySelector('video');
-    const button = document.querySelector('button');
+import MediaPlayer from "./MediaPlayer.js";
 
-    /* En JS no existen las clases, existen objetos y 
-    a partir de esos objetos se instancian otros */
-    function MediaPlayer(config){ //clase, se le pasa un objeto configuracion
-      this.media = config.el;
-    }
+const video = document.querySelector("video");
+const button = document.querySelector("button");
 
-    /* Los metodos se agregan al prototype */
-    MediaPlayer.prototype.play = function(){
-      this.media.play();
-    }
+const player = new MediaPlayer({ el: video });
 
-    MediaPlayer.prototype.pause=function(){
-      this.media.pause();
-    }
+button.onclick = () => player.togglePlay();
 
-    MediaPlayer.prototype.togglePlay=function(){
-      if (!this.media.paused) {
-        this.pause();
-        return
-      }
-      this.play();
-    }
-
-    const player = new MediaPlayer({el:video})
-
-    button.onclick = () => player.togglePlay()
-
-    /* 
+/* 
     Atributo async para los scripts externos,
     con este atributo la peticion del script 
     no detiene el procesamiento del dom, una 
@@ -37,7 +16,7 @@ const video = document.querySelector('video');
     y hasta que se termina la ejecucion continua 
     el procesamiento del dom
     */
-   /*
+/*
    Atributo defer, detiene la ejecucion del script
    hasta que se finalice el procesamiento del dom
    */
