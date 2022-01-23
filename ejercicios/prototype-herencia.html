@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prototype</title>
+  </head>
+  <body>
+    <h1>Herencia prototype</h1>
+
+    <script>
+      
+      function Hero(name) {
+        this.name = name;
+      }
+
+      Hero.prototype.saludar = function () {
+        console.log(`Hola soy ${this.name}, new`);
+      };
+
+      const zelda = new Hero("Zelda");
+
+      ////Propiedades de la instancia
+      console.log('name:', zelda.name);
+
+      ////Propiedades de la clase
+      console.log('Saludar:', zelda.saludar);
+
+      ////Propiedades heredadas ej to String
+      console.log('toString:', zelda.toString);
+
+      //// hasOwnProperty, de donde sale toString?
+      console.log('zelda.hasOwnProperty("saludar"):', zelda.hasOwnProperty('saludar'));
+
+      /// ver el prototype
+      console.log(Object.getPrototypeOf(zelda));
+
+      const prototypeOfZelda = Object.getPrototypeOf(zelda);
+      
+     console.log(prototypeOfZelda === Hero.prototype);// true, es el mismo objeto
+
+     Hero.prototype.fight = function(){
+       console.log('fight');
+     }
+
+     zelda.fight();
+
+     console.log('zelda.hasOwnProperty("fight"):', zelda.hasOwnProperty('fight'));//false
+
+     console.log('prototypeOfZelda("toString"):', prototypeOfZelda.hasOwnProperty('toString'));//false
+     //prototype del prototype
+     const prototypeOfprototypeOfZelda =  Object.getPrototypeOf(prototypeOfZelda)
+     console.log('prototypeOfprototypeOfZelda("toString"):', prototypeOfprototypeOfZelda.hasOwnProperty('toString'));//false
+
+    </script>
+  </body>
+</html>
