@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <title>PlatziMediaPlayer.js</title>
+    <link
+      rel="stylesheet"
+      href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
+    />
+    <link rel="stylesheet" href="./assets/index.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>PlatziMediaPlayer.js</h1>
+      <p>An extensible media player.</p>
+    </header>
+
+    <main class="container">
+      <video class="movie">
+        <source src="./assets/BigBuckBunny.mp4" />
+      </video>
+
+      <button>Play/Pause</button>
+    </main>
+
+    <script>
+    const video = document.querySelector('video');
+    const button = document.querySelector('button');
+
+    /* En JS no existen las clases, existen objetos y 
+    a partir de esos objetos se instancian otros */
+    function MediaPlayer(config){ //clase, se le pasa un objeto configuracion
+      this.media = config.el;
+    }
+
+    /* Los metodos se agregan al prototype */
+    MediaPlayer.prototype.play = function(){
+      this.media.play();
+    }
+
+    MediaPlayer.prototype.pause=function(){
+      this.media.pause();
+    }
+
+    MediaPlayer.prototype.togglePlay=function(){
+      if (!this.media.paused) {
+        this.pause();
+        return
+      }
+      this.play();
+    }
+
+    const player = new MediaPlayer({el:video})
+
+    button.onclick = () => player.togglePlay()
+    </script>
+  </body>
+</html>
