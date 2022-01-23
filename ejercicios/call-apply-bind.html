@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call, Apply, Bind</title>
+</head>
+<body>
+    <h1>Call, Apply, Bind</h1>
+
+    <ul>
+        <li>
+            <button class="call-to-action">1</button>
+        </li>
+        <li>
+            <button class="call-to-action">2</button>
+        </li>
+        <li>
+            <button class="call-to-action">3</button>
+        </li>
+    </ul>
+
+    <script>
+        //establecer this usando call
+        function saludar(){
+            console.log(`Hola. soy ${this.name} ${this.apellido}`);
+        }
+
+        const richard = {
+            name: 'Richard',
+            apellido: 'Lopez'
+        }
+
+        saludar.call(richard);
+
+        //establecer this usando call pasandole argumentos
+        function caminar(mts, dir){
+            console.log(`${this.name} camina ${mts} metros hacia el ${dir}`);
+        }
+
+        caminar.call(richard, 400, 'norte');
+
+        //this con apply
+        caminar.apply(richard, [800, 'noreste']);
+
+        //this con bind
+        const daniel = {name: 'Daniel', apellido: 'Sanchez'}
+
+        const danielSaluda = saludar.bind(daniel);
+        danielSaluda();
+
+
+        const danielCamina = caminar.bind(daniel);
+        //const danielCamina = caminar.bind(daniel, 2000); //de este modo se pueden pasar parcialmente los argumentos
+
+        danielCamina(1000, 'este');
+        //danielCamina( 'este');
+
+        //Se parece a un array pero no es un array y por tanto no tiene los metodos de un array como el foreach
+        const btns = document.getElementsByClassName('call-to-action');
+
+       /* btns.forEach(btn => {
+            btn.onclick = () => alert('hyat');
+        });//La consola dice que no es una funcion*/
+
+        Array.prototype.forEach.call(btns, btn => {
+            btn.onclick = () => alert('hyat');
+        });
+
+    </script>
+</body>
+</html>
