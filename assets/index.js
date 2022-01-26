@@ -14,6 +14,12 @@ const player = new MediaPlayer({
 buttonPlay.onclick = () => player.togglePlay();
 buttonMute.onclick = () => player.toggleMute();
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(error => {
+    console.log(error.message);
+  })
+}
+
 /* 
     Atributo async para los scripts externos,
     con este atributo la peticion del script 
