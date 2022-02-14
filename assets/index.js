@@ -1,6 +1,6 @@
 import MediaPlayer from "./MediaPlayer.js";
 import AutoPlay from "./plugins/AutoPlay.js";
-import AutoPause from "./plugins/AutoPause.js";
+import AutoPause from "./plugins/AutoPause.ts";
 
 const video = document.querySelector("video");
 const buttonPlay = document.querySelector("button#btn-play");
@@ -13,13 +13,13 @@ const player = new MediaPlayer({
 
 buttonPlay.onclick = () => player.togglePlay();
 buttonMute.onclick = () => player.toggleMute();
-/*
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('../sw.js').catch(error => {
     console.log(error.message);
   })
 }
-*/
+
 
 /* 
     Atributo async para los scripts externos,

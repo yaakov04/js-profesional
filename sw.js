@@ -20,7 +20,7 @@ self.addEventListener('fetch', e => {
 async function precache(){
     const cache = await caches.open(VERSION);
     cache.addAll([
-        
+        /*
         '/',
         './index.html',
         './assets/MediaPlayer.js',
@@ -29,7 +29,7 @@ async function precache(){
         './assets/BigBuckBunny.mp4',
         './assets/plugins/AutoPlay.js',
         './assets/plugins/AutoPause.js',
-        
+        */
     ])
 }
 
